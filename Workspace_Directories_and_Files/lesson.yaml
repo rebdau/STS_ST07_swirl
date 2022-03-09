@@ -342,11 +342,11 @@
     directory at the start of these questions. We removed this object, but before that, we saved the workspace as "ST07_RData".
 
 - Class: cmd_question
-  Output: Reload the objects that you stored as "ST07_RData", using the function "load()". Recall that we 
-    created "ST07_RData" in the directory just upstream of your current working directory. You have to specify this path in the argument!
-  CorrectAnswer: load("../ST07_RData")
-  AnswerTests: omnitest(correctExpr='load("../ST07_RData")')
-  Hint: Type load("../ST07_RData")
+  Output: Reload the objects that you stored as "ST07.RData", using the function "load()". Recall that we 
+    created "ST07.RData" in the directory just upstream of your current working directory. You have to specify this path in the argument!
+  CorrectAnswer: load("../ST07.RData")
+  AnswerTests: omnitest(correctExpr='load("../ST07.RData")')
+  Hint: Type load("../ST07.RData")
 
 - Class: cmd_question
   Output: Have a look again at your workspace.
