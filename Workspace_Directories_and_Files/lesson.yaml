@@ -339,7 +339,7 @@
 - Class: text
   Output: Now, to go back to the original working directory, we want the object old.dir back in our workspace!
     Recall that we created the variable old.dir with the full path for the orginal working 
-    directory at the start of these questions. We removed this object, but before that, we saved the workspace as "ST07_RData".
+    directory at the start of these questions. We removed this object, but before that, we saved the workspace as "ST07.RData".
 
 - Class: cmd_question
   Output: Reload the objects that you stored as "ST07.RData", using the function "load()". Recall that we 
