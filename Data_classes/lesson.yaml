@@ -443,7 +443,7 @@
 
 - Class: cmd_question
   Output: Let's give that a try here. Call the sum() function to count the 
-    total number of TRUEs in the output of is.na(a). All in a single command. 
+    total number of TRUEs in the output of is.na(a). 
     Don't assign the result to a new variable.
   CorrectAnswer: sum(is.na(a))
   AnswerTests: omnitest(correctExpr='sum(is.na(a))')
