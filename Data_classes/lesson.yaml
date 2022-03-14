@@ -435,6 +435,26 @@
   CorrectAnswer: which(!is.na(a))
   AnswerTests: omnitest(correctExpr='which(!is.na(a))')
   Hint: Nest the !is.na() function in the which() function.
+
+- Class: text
+  Output: The trick to compute the number of NAs in our data is based on the fact that underneath the surface, R represents TRUE 
+    as the number 1 and FALSE as the number 0. Therefore, if we take the sum of a bunch 
+    of TRUEs and FALSEs, we get the total number of TRUEs.
+
+- Class: cmd_question
+  Output: Let's give that a try here. Call the sum() function to count the 
+    total number of TRUEs in the output of is.na(a). All in a single command. 
+    Don't assign the result to a new variable.
+  CorrectAnswer: sum(is.na(a))
+  AnswerTests: omnitest(correctExpr='sum(is.na(a))')
+  Hint: Nest the is.na() function in the sum() fucntion to count the number NAs in the data.
+    
+- Class: cmd_question
+  Output: And now, the number of non-missing values in a, in a single command.
+    (Don't assign the result to a new variable.)
+  CorrectAnswer: sum(!is.na(a))
+  AnswerTests: omnitest(correctExpr='sum(!is.na(a))')
+  Hint: Nest the !is.na() function in the sum() fucntion to count the number NAs in the data.
     
 - Class: cmd_question
   Output: The mean() function calculates the mean of a numeric vector. But different functions handle NAs in different ways. First look up in the documentation of the mean() function what you should do with missing values.
