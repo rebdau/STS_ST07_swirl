@@ -46,7 +46,7 @@
   Output: It's okay if that last command seemed a little strange to you. It should! The dim() function allows you to get OR set the `dim` attribute for an R object. In this case, we assigned the value c(4, 5) to the `dim` attribute of my_vector.
 
 - Class: cmd_question
-  Output: CHeck again the dimensions of my_vector.
+  Output: Check again the dimensions of my_vector.
   CorrectAnswer: dim(my_vector)
   AnswerTests: omnitest(correctExpr='dim(my_vector)')
   Hint: use the dim() function.
@@ -310,9 +310,53 @@
   Output: "In summary, you use data frames if columns (variables) can be expected to be of different types (numeric, character, logical). Matrices are for data of the same type. Consequently, the choice matrix/data.frame is only problematic if you have data of the same type."
 
 - Class: text
-  Output: "Matrices are a necessity to do linear algebra-type of operations. Data frames are more convenient if you frequently refer to its columns (via the compact $ operator)"
+  Output: "Matrices are a necessity to do linear algebra-type of operations. Data frames are more convenient if you frequently refer to its columns (via the compact $ operator)."
 
 - Class: text
-  Output: Hurray! In this lesson, you learned the basics of working with two very important and common data structures -- matrices and data frames. There's much more to learn and we'll be covering more advanced topics, particularly with respect to data frames, in future lessons.
+  Output: "In the 'subsetting vectors' lesson, I promissed you that the match() function would come in handy if you want to merge to datasets that are not in the same order and don't have the same length. This is the right place to figure this out!"
+
+- Class: cmd_question
+  Output: First create another data frame, called my_data2, with the results of another clinical test for patients Kelly, Bill and Jane. The first column of my_data2 has column name "patient" and corresponds to the vector c("Kelly","Bill","Jane"). The second column has name "test2" and corresponds to the numbers 21:23. Use the data.frame() function to stick the two vectors together in a data frame.
+  CorrectAnswer: my_data2 <- data.frame(patient = c("Kelly","Bill","Jane"),test2 = 21:23)
+  AnswerTests: any_of_exprs('my_data2 <- data.frame(patient = c("Kelly","Bill","Jane"),test2 = 21:23)', 'my_data2 <- data.frame("patient" = c("Kelly","Bill","Jane"),"test2" = 21:23)')
+  Hint: 'The arguments are: patient = c("Kelly","Bill","Jane") and test2 = 21:23.'
+
+- Class: cmd_question
+  Output: Now type match(my_data$patient,my_data2$patient) to look at the output.
+  CorrectAnswer: match(my_data$patient,my_data2$patient)
+  AnswerTests: omnitest(correctExpr='match(my_data$patient,my_data2$patient)')
+  Hint: match(my_data$patient,my_data2$patient)
+
+- Class: mult_question
+  Output: The output of match(my_data$patient,my_data2$patient) is a numeric vector with length
+  AnswerChoices: the number of rows in my_data; the number of columns in my_data; the number of rows in my_data2; the number of columns in my_data2
+  CorrectAnswer: the number of rows in my_data
+  AnswerTests: omnitest(correctVal="the number of rows in my_data")
+  Hint: Look at the vector and the two data frames.
+
+- Class: mult_question
+  Output: The output of match(my_data$patient,my_data2$patient) is a numeric vector in which the values are
+  AnswerChoices: the indexes in my_data$patient; the indexes in my_data2$patient
+  CorrectAnswer: the indexes in my_data2$patient
+  AnswerTests: omnitest(correctVal="the indexes in my_data2$patient")
+  Hint: Look at the vector and the two data frames.
+
+- Class: text
+  Output: The output of match(my_data$patient,my_data2$patient) gives a numeric vector with the length of the first vector, and the corresponding indexes in the second vector. Therefore, you can use this index vector to merge the two dataframes.
+ 
+- Class: cmd_question
+  Output: Using the data.frame() function, merge my_data, with the corresonding subset of my_data2. The subset of my_data2 is determined by the index vector match(my_data$patient,my_data2$patient).
+  CorrectAnswer: data.frame(my_data,my_data2[match(my_data$patient,my_data2$patient),])
+  AnswerTests: omnitest(correctExpr='data.frame(my_data,my_data2[match(my_data$patient,my_data2$patient),])')
+  Hint: In my_data2[,], you should type the index vector match(my_data$patient,my_data2$patient) BEFORE the comma, to subset the rows. The place after the comma can remain blank, because we take all columns of my_data2.
+ 
+- Class: cmd_question
+  Output: And if we only wanted to merge column 2 (test2) of my_data2 to my_data?
+  CorrectAnswer: data.frame(my_data,my_data2[match(my_data$patient,my_data2$patient),2])
+  AnswerTests: omnitest(correctExpr='data.frame(my_data,my_data2[match(my_data$patient,my_data2$patient),2])')
+  Hint: In my_data2[,], you should type the index vector match(my_data$patient,my_data2$patient) BEFORE the comma, to subset the rows. You should type 2 in the place after the comma, because we select column 2 of my_data2.
+ 
+- Class: text
+  Output: Hurray! In this lesson, you learned the basics of working with two very important and common data structures -- matrices and data frames -- and you even learned to merge data frames!
 
 
