@@ -104,7 +104,7 @@
   Hint: Look above in the lesson, and combine the previous expressions with the & operator to create an index vector.
 
 - Class: cmd_question
-  Output: I've already shown you how to subset just the first ten values of x using x[1:10]. Now, applying your skills in creating sequences of numbers, and create a vector that repeats ten times the first three values of y.
+  Output: I've already shown you how to subset just the first ten values of x using x[1:10]. Now, applying your skills in creating sequences of numbers, create a vector that repeats ten times the first ten values of y.
   CorrectAnswer: y[rep(1:10,10)]
   AnswerTests: any_of_exprs('y[rep(c(1:10),10)]', 'y[rep(c(1:10),times=10)]','y[rep(1:10,10)]', 'y[rep(1:10,times=10)]')
   Hint: leave swirl to try it out using play() and come back using nxt(). You need to create an index vector that repeats the numbers 1 to 10 ten times and place that vector between the square brackets next to y. (watch out, not x!)
@@ -233,6 +233,33 @@
   AnswerTests: omnitest(correctExpr='sum(a %in% b)')
   Hint: Remember that TRUE is 1 and FALSE = 0, and use the sum() function.
   
+- Class: text
+  Output: 'The match() function is related to the %in% operator.'
+
+- Class: text
+  Output: 'The output of match(a,b) is a numeric vector with the length of vector a, giving the position of the first match of each element of vector a in vector b.'
+
+- Class: cmd_question
+  Output: 'Try it out, type match(a,b)'
+  CorrectAnswer: 'match(a,b)'
+  AnswerTests: omnitest(correctExpr='match(a,b)')
+  Hint: match(a,b)
+ 
+- Class: text
+  Output: The output tells us that the second element of vector a is at position 1 of vector b and the 5th element in vector a is at position 2 of vector b. The other elements of vector a are not present in vector b, and are therefore represented as NA."
+
+- Class: cmd_question
+  Output: 'The output of match(a,b) is a vector with indexes in vector b. Although it has the length of vector a, it can thus be used to subset vector b. Can you subset b using the index vector created by match(a,b)?'
+  CorrectAnswer: 'b[match(a,b)]'
+  AnswerTests: omnitest(correctExpr='b[match(a,b)]')
+  Hint: b[match(a,b)]
+
+- Class: text
+  Output: Did you see that this subset is much longer than the length of b? It has the length of a. This corresponds actually to the elements in b that are also present in a (aka the intersection between a and b), -- ALIGNED WITH vector a -- ! You can perfectly put this 'subsetted' b vector next to a."
+
+- Class: text
+  Output: This will come in handy if you want to merge two datasets that are not in the same order and don't have the same length. You need to find the intersection and match the rows.
+
 - Class: text
   Output: So far, we've covered three types of index vectors -- logical, positive integer, and 
     negative integer. The only remaining type requires us to introduce the concept of 'named' elements.
