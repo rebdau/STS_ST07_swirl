@@ -181,7 +181,7 @@
   Output: In a single command, convert 3.14 into a character value and verify the class (TRUE or FALSE?).
   CorrectAnswer: is.character(as.character(3.14))
   AnswerTests: omnitest(correctExpr='is.character(as.character(3.14))')
-  Hint: You need to "nest" the function as.numeric() into the function is.character()
+  Hint: You need to "nest" the function as.character() into the function is.character()
 
 - Class : cmd_question
   Output: Character values can be concatenated with the paste() function. Create "Joe_the_Plumber" using the paste function and assign it to the object JtP. To first look up how to create the underscores between the words, type play(), then ?paste, read the documentation, give it a try, and then type nxt() to fill in your answer.
