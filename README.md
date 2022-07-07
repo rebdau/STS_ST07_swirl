@@ -1,5 +1,5 @@
 # STS_ST07
-STS ST07 "Programmation en R" - An introduction to R, taught to graduate students subscribed at the Science and Health Graduate school of Université de Picardie Jules Verne (UPJV), Amiens, France. This course covers basic material, adapted from the Swirl Course Network. 
+STS ST07 "Programmation en R" - An introduction to R, taught to graduate students subscribed at the Science and Health Graduate school of Université de Picardie Jules Verne (UPJV), Amiens, France. This course covers basic material, adapted from the Swirl Course Network.
 The course consists of Swirl lessons, alternated with exercises.
 
 Swirl lessons
@@ -27,7 +27,7 @@ Order of lessons and exercises
 
 6: Sequences of Numbers
 
-7: Subsetting Vectors 
+7: Subsetting Vectors
 
 8: Matrices and Data Frames        
 
@@ -43,4 +43,4 @@ Order of lessons and exercises
 
 14: Functions
 
-15:Exercise 4
+15: Exercise 4
