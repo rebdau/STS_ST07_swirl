@@ -1,0 +1,362 @@
+- Class: meta
+  Course: STS ST07
+  Lesson: Matrices and Data Frames
+  Author: Rebecca Dauwe, adapted from Simon Queenborough & Nick Carchedi
+  Type: Standard
+  Organization: UPJV
+  Version: 2.2.0
+
+- Class: text
+  Output: "In this lesson, we'll cover matrices and data frames. Both represent 'rectangular' data types, meaning that they are used to store tabular data, with rows and columns."
+
+- Class: text
+  Output: The main difference, as you'll see, is that matrices can only contain a single class of data, while data frames can consist of many different classes of data.
+
+- Class: cmd_question
+  Output: Let's create a vector containing the numbers 1 through 20 using the `:` operator. Store the result in a variable called my_vector.
+  CorrectAnswer: my_vector <- 1:20
+  AnswerTests: omnitest(correctExpr='my_vector <- 1:20')
+  Hint: You learned about the `:` operator in the lesson on sequences. If you wanted to create a vector containing the numbers 1, 2, and 3 (in that order), you could use either c(1, 2, 3) or 1:3. In this case, we want the numbers 1 through 20 stored in a variable called my_vector. Also, remember that you don't need the c() function when using `:`.
+
+- Class: cmd_question
+  Output: View the contents of the vector you just created.
+  CorrectAnswer: my_vector
+  AnswerTests: omnitest(correctExpr='my_vector')
+  Hint: Type my_vector to view its contents.
+
+- Class: cmd_question
+  Output: The dim() function tells us the 'dimensions' of an object. What happens if we do dim(my_vector)? Give it a try.
+  CorrectAnswer: dim(my_vector)
+  AnswerTests: omnitest(correctExpr='dim(my_vector)')
+  Hint: Just type dim(my_vector) to see what happens.
+
+- Class: cmd_question
+  Output: Clearly, that's not very helpful! Since my_vector is a vector, it has only one dimension and therefore does not have a `dim` attribute (so it's just NULL), but we can find its length using the length() function. Try that now.
+  CorrectAnswer: length(my_vector)
+  AnswerTests: omnitest(correctExpr='length(my_vector)')
+  Hint: Type length(my_vector) to view the length of the vector you just created.
+
+- Class: cmd_question
+  Output: Ah! That's what we wanted. But, what happens if we give my_vector a `dim` attribute? Let's give it a try. Type dim(my_vector) <- c(4, 5).
+  CorrectAnswer: dim(my_vector) <- c(4, 5)
+  AnswerTests: omnitest(correctExpr='dim(my_vector) <- c(4, 5)')
+  Hint: Type dim(my_vector) <- c(4, 5) to give my_vector a `dim` attribute.
+
+- Class: text
+  Output: It's okay if that last command seemed a little strange to you. It should! The dim() function allows you to get OR set the `dim` attribute for an R object. In this case, we assigned the value c(4, 5) to the `dim` attribute of my_vector.
+
+- Class: cmd_question
+  Output: Check again the dimensions of my_vector.
+  CorrectAnswer: dim(my_vector)
+  AnswerTests: omnitest(correctExpr='dim(my_vector)')
+  Hint: use the dim() function.
+
+- Class: cmd_question
+  Output: Another way to see this is by calling the attributes() function on my_vector. Try it now.
+  CorrectAnswer: attributes(my_vector)
+  AnswerTests: omnitest(correctExpr='attributes(my_vector)')
+  Hint: The command attributes(my_vector) will show you all of the attributes for the my_vector object.
+
+- Class: text
+  Output: Just like in math class, when dealing with a 2-dimensional object (think rectangular table), the first number is the number of rows and the second is the number of columns. Therefore, we just gave my_vector 4 rows and 5 columns.
+
+- Class: cmd_question
+  Output: But, wait! That doesn't sound like a vector any more. Well, it's not. Now it's a matrix. View the contents of my_vector now to see what it looks like.
+  CorrectAnswer: my_vector
+  AnswerTests: omnitest(correctExpr='my_vector')
+  Hint: Type my_vector to view its contents.
+
+- Class: cmd_question
+  Output: Now, let's confirm it's actually a matrix by using the class() function. Type class(my_vector) to see what I mean.
+  CorrectAnswer: class(my_vector)
+  AnswerTests: omnitest(correctExpr='class(my_vector)')
+  Hint: Type class(my_vector) to view the class of my_vector.
+
+- Class: cmd_question
+  Output: Sure enough, my_vector is now a matrix. We should store it in a new variable that helps us remember what it is. Store the value of my_vector in a new variable called my_matrix.
+  CorrectAnswer: my_matrix <- my_vector
+  AnswerTests: omnitest(correctExpr='my_matrix <- my_vector')
+  Hint: Since we can't just change the name of our my_vector variable, we'll assign its value to a new variable with my_matrix <- my_vector.
+
+- Class: text
+  Output: The example that we've used so far was meant to illustrate the point that a matrix is simply an atomic vector with a dimension attribute. A more direct method of creating the same matrix uses the matrix() function.
+
+- Class: cmd_question
+  Output: Bring up the help file for the matrix() function now using the `?` function.
+  CorrectAnswer: ?matrix
+  AnswerTests: omnitest(correctExpr='?matrix')
+  Hint: The command ?matrix will do the trick.
+
+- Class: cmd_question
+  Output: Now, look at the documentation for the matrix function and see if you can figure out how to create a matrix containing the same numbers (1-20) and dimensions (4 rows, 5 columns) by calling the matrix() function. Store the result in a variable called my_matrix2.
+  CorrectAnswer: my_matrix2 <- matrix(1:20, nrow=4, ncol=5)
+  AnswerTests: calculates_same_value('matrix(1:20, nrow=4, ncol=5)'); expr_creates_var('my_matrix2')
+  Hint: Call the matrix() function with three arguments -- 1:20, the number of rows, and the number of columns. Be sure to specify arguments by their proper names and store the result in my_matrix2 (not in my_matrix).
+
+- Class: cmd_question
+  Output: Finally, let's confirm that my_matrix and my_matrix2 are actually identical. The identical() function will tell us if its first two arguments are the same. Try it out.
+  CorrectAnswer: identical(my_matrix, my_matrix2)
+  AnswerTests: any_of_exprs('identical(my_matrix, my_matrix2)', 'identical(my_matrix2, my_matrix)')
+  Hint: If you're not sure about this one, then checkout the documentation for identical() using the `?` function.
+
+- Class: text
+  Output: Now, imagine that the numbers in our table represent some measurements from a clinical experiment, where each row represents one patient and each column represents one variable for which measurements were taken.
+
+- Class: text
+  Output: We may want to label the rows, so that we know which numbers belong to each patient in the experiment. One way to do this is to add a column to the matrix, which contains the names of all four people.
+
+- Class: cmd_question
+  Output: Let's start by creating a character vector containing the names of our patients -- Bill, Gina, Kelly, and Sean. Remember that double quotes tell R that something is a character string. Store the result in a variable called patients.
+  CorrectAnswer: patients <- c("Bill", "Gina", "Kelly", "Sean")
+  AnswerTests: omnitest(correctExpr='patients <- c("Bill", "Gina", "Kelly", "Sean")')
+  Hint: Make sure to capitalize the first letter of each name and to store the result in a variable called patients. Also, don't get the order of the patients mixed up! That would be a disaster!
+
+- Class: cmd_question
+  Output: Now we'll use the cbind() function to 'combine columns'. Don't worry about storing the result in a new variable. Just call cbind() with two arguments -- the patients vector and my_matrix.
+  CorrectAnswer: cbind(patients, my_matrix)
+  AnswerTests: omnitest(correctExpr='cbind(patients, my_matrix)')
+  Hint: Type cbind(patients, my_matrix) to add the names of our patients to the matrix of numbers.
+
+- Class: text
+  Output: Something is fishy about our result! It appears that combining the character vector with our matrix of numbers caused everything to be enclosed in double quotes. This means we're left with a matrix of character strings, which is no good.
+
+- Class: text
+  Output: If you remember back to the beginning of this lesson, I told you that matrices can only contain ONE class of data. Therefore, when we tried to combine a character vector with a numeric matrix, R was forced to 'coerce' the numbers to characters, hence the double quotes.
+
+- Class: text
+  Output: This is called 'implicit coercion', because we didn't ask for it. It just happened. But why didn't R just convert the names of our patients to numbers? I'll let you ponder that question on your own.
+
+- Class: text
+  Output: So, we're still left with the question of how to include the names of our patients in the table without destroying the integrity of our numeric data. You can add row names and column names to a matrix, without altering the content of the matrix, using the functions rownames() and colnames(). These functions retrieve or set the row and column names of a matrix.
+
+- Class: cmd_question
+  Output: Using rownames(), assign the patients vector as the row names of my_matrix.
+  CorrectAnswer: rownames(my_matrix) <- patients
+  AnswerTests: omnitest(correctExpr='rownames(my_matrix) <- patients')
+  Hint: proceed in similar way like when you added the dim attribute.
+
+- Class: cmd_question
+  Output: contemplate the result.
+  CorrectAnswer: my_matrix
+  AnswerTests: omnitest(correctExpr='my_matrix')
+  Hint: type my_matrix.
+
+- Class: cmd_question
+  Output: In the same way, using colnames(), add the vector c("age", "weight", "bp", "rating", "test") as column names to my_matrix.
+  CorrectAnswer: colnames(my_matrix) <- c("age", "weight", "bp", "rating", "test")
+  AnswerTests: omnitest(correctExpr='colnames(my_matrix) <- c("age", "weight", "bp", "rating", "test")')
+  Hint: proceed in similar way like when you added the row names.
+  
+- Class: cmd_question
+  Output: have a look at the result.
+  CorrectAnswer: my_matrix
+  AnswerTests: omnitest(correctExpr='my_matrix')
+  Hint: type my_matrix.
+
+- Class: cmd_question
+  Output: A matrix should be seen as a vector with two dimensions. The dimensions can be accessed using the square brackets [,] in which the indexes of rows, and columns are given. Give me the elements in my_matrix, on the second row and the 2nd, 4th and 5th column please.
+  CorrectAnswer: my_matrix[2,c(2,4,5)]
+  AnswerTests: omnitest(correctExpr='my_matrix[2,c(2,4,5)]')
+  Hint: The same like subsetting vectors, now with two dimensions, first rows, then columns.
+  
+- Class: cmd_question
+  Output: And can you give me the second column of my_matrix using integer indexes?
+  CorrectAnswer: my_matrix[,2]
+  AnswerTests: omnitest(correctExpr='my_matrix[,2]')
+  Hint: leaving a dimension blank takes the complete dimension. So if you want all rows, you leave the first dimension blank.
+  
+- Class: cmd_question
+  Output: Do you remember how to access an element in a vector using the name? Now give me the second column of my_matrix using the column name "weight".
+  CorrectAnswer: my_matrix[,"weight"]
+  AnswerTests: omnitest(correctExpr='my_matrix[,"weight"]')
+  Hint: leaving a dimension blank takes the complete dimension. So if you want all rows, you leave the first dimension blank.
+  
+- Class: cmd_question
+  Output: If you want a table with different types of columns, such as numeric, character, and factor, you need to create a dataframe. You can include the names of our patients in my_matrix2 without destroying the integrity of our numeric data, if you change it to a dataframe. Try the following -- my_data <- data.frame(patients, my_matrix2)
+  CorrectAnswer: my_data <- data.frame(patients, my_matrix2)
+  AnswerTests: omnitest(correctExpr='my_data <- data.frame(patients, my_matrix2)')
+  Hint: Type my_data <- data.frame(patients, my_matrix2), so we can explore what happens.
+
+- Class: text
+  Output: data.frame() is a really convenient function to stick vectors together in a data frame. Keep that one in mind! 
+
+- Class: cmd_question
+  Output: Now view the contents of my_data to see what we've come up with.
+  CorrectAnswer: my_data
+  AnswerTests: omnitest(correctExpr='my_data')
+  Hint: Type my_data to view its contents.
+
+- Class: text
+  Output: It looks like the data.frame() function allowed us to store our character vector of names right alongside our matrix of numbers. That's exactly what we were hoping for! 
+
+- Class: text
+  Output: Behind the scenes, the data.frame() function takes any number of arguments and returns a single object of class `data.frame` that is composed of the original objects.
+
+- Class: cmd_question
+  Output: Let's confirm this by calling the class() function on our newly created data frame.
+  CorrectAnswer: class(my_data)
+  AnswerTests: omnitest(correctExpr='class(my_data)')
+  Hint: The class function takes one argument -- the object of which you want to determine the class.
+
+- Class: text
+  Output: It's also possible to assign names to the individual rows and columns of a data frame, using the same rownames() and colnames() functions as for matrices.
+
+- Class: text
+  Output: "However, since we've already given the patient names in the first column of the dataframe, let's just assign names to the columns of our data frame so that we know what type of measurement each column represents."
+
+- Class: cmd_question
+  Output: Since we have six columns (including patient names), we'll need to first create a vector containing one element for each column. Create a character vector called cnames that contains the following values (in order) -- "patient", "age", "weight", "bp", "rating", "test".
+  CorrectAnswer: cnames <- c("patient", "age", "weight", "bp", "rating", "test")
+  AnswerTests: omnitest(correctExpr='cnames <- c("patient", "age", "weight", "bp", "rating", "test")')
+  Hint: Make sure all of the names are lowercase, surrounded by double quotes, and separated with commas. Don't forget to use the c() function.
+
+- Class: cmd_question
+  Output: Now, use the colnames() function to set the `colnames` attribute for our data frame. This is similar to the way we used the dim() function earlier in this lesson.
+  CorrectAnswer: colnames(my_data) <- cnames
+  AnswerTests: omnitest(correctExpr='colnames(my_data) <- cnames')
+  Hint: Try colnames(my_data) <- cnames.
+
+- Class: cmd_question
+  Output: Let's see if that got the job done. Print the contents of my_data.
+  CorrectAnswer: my_data
+  AnswerTests: omnitest(correctExpr='my_data')
+  Hint: Print the contents of my_data to the console.
+
+- Class: cmd_question
+  Output: In my_data, the patients weight is in column 3 (because we added a column with patient names). We can access a colmun in the dataframe with exactly the same way of indexing like you used for the matrix. For example, give the third column in my_data using the number index.
+  CorrectAnswer: my_data[,3]
+  AnswerTests: omnitest(correctExpr='my_data[,3]')
+  Hint: Use the square brackets with two dimensions and type 3 in the column dimension (right of the comma).
+  
+- Class: cmd_question
+  Output: You can access the same column in my_data using the name index ("weight"), as you did for my_matrix.
+  CorrectAnswer: my_data[,"weight"]
+  AnswerTests: omnitest(correctExpr='my_data[,"weight"]')
+  Hint: Use the square brackets with two dimensions and type "weight" in the column dimension (right of the comma).
+  
+- Class: cmd_question
+  Output: But a dataframe has an other option to access columns, and that option does not exist for matrices. Type my_data$weight
+  CorrectAnswer: my_data$weight
+  AnswerTests: omnitest(correctExpr='my_data$weight')
+  Hint: Type my_data$weight
+
+- Class: text
+  Output: The $ operator works to access named elements of a "list". And a dataframe is actually a list of vectors of the same length. (Whereas lists can contain all kind of objects of different lengths, more about that another time!)
+  
+- Class: cmd_question
+  Output: I mentioned earlier that matrices are more memory efficient than data frames. You can check this with the object.size() function. What is the object size of matrix my_matrix2?
+  CorrectAnswer: object.size(my_matrix2)
+  AnswerTests: omnitest(correctExpr='object.size(my_matrix2)')
+  Hint: use the object.size() function with argument my_matrix2
+  
+- Class: cmd_question
+  Output: And what is the object size if we transform my_matrix2 into a data frame? Nest the as.data.frame() function into the object.size() function.
+  CorrectAnswer: object.size(as.data.frame(my_matrix2))
+  AnswerTests: omnitest(correctExpr='object.size(as.data.frame(my_matrix2))')
+  Hint: Nest the as.data.frame() function into the object.size() function. The argument is my_matrix2.
+
+- Class: text
+  Output: Almost 4 times bigger!
+  
+- Class: text
+  Output: Be well aware that certain mathematical operations do not behave in the same way on matrices and data.frames!
+
+- Class: cmd_question
+  Output: To check it out, first save as.data.frame(my_matrix2) into a new object called my_df2.
+  CorrectAnswer: my_df2 <- as.data.frame(my_matrix2)
+  AnswerTests: omnitest(correctExpr='my_df2 <- as.data.frame(my_matrix2)')
+  Hint: my_df2 <- as.data.frame(my_matrix2)
+
+- Class: cmd_question
+  Output: Check the content of the dataframe to see if the numbers are still seen as numeric, so that we can apply mathematical operations on them. Use str(my_df2).
+  CorrectAnswer: str(my_df2)
+  AnswerTests: omnitest(correctExpr='str(my_df2)')
+  Hint: str(my_df2)
+
+- Class: cmd_question
+  Output: And check my_matrix2 again. Use str(my_matrix2).
+  CorrectAnswer: str(my_matrix2)
+  AnswerTests: omnitest(correctExpr='str(my_matrix2)')
+  Hint: str(my_matrix2)
+  
+- Class: text
+  Output: OK! They are both tables with integers. So we should be able to calculate the mean of these elements.
+
+- Class: cmd_question
+  Output: In my_matrix2 calculate the mean of the values in row 3, column 2,4, and 5. Use the mean() function and select the values by specifying the indexes in my_matrix2[,].
+  CorrectAnswer: mean(my_matrix2[3,c(2,4,5)])
+  AnswerTests: omnitest(correctExpr='mean(my_matrix2[3,c(2,4,5)])')
+  Hint: The argument for the mean function is a subset of my_matrix. You get that by writing the indexes 3 and c(2,4,5) in the [,].
+  
+- Class: cmd_question
+  Output: And in my_df2 calculate the mean of these same values in row 3, column 2,4, and 5. Use the mean() function and select the values by specifying the indexes in my_df2[,].
+  CorrectAnswer: mean(my_df2[3,c(2,4,5)])
+  AnswerTests: omnitest(correctExpr='mean(my_df2[3,c(2,4,5)])')
+  Hint: The argument for the mean function is a subset of my_df. You get that by writing the indexes 3 and c(2,4,5) in the [,].
+
+- Class: cmd_question
+  Output: "That doesn't work! although I think the subsetting my_df2[3,c(2,4,5)] must have extracted the integers from the data frame? Check that..."
+  CorrectAnswer: my_df2[3,c(2,4,5)]
+  AnswerTests: omnitest(correctExpr='my_df2[3,c(2,4,5)]')
+  Hint: my_df2[3,c(2,4,5)]
+  
+- Class: text
+  Output: Yes that was ok...If a command does not work as you expected, always check smaller parts of it to find out the reason.
+
+- Class: text
+  Output: Here, the reason of the failure was that data frames do not allow calculations across columns, because they are just lists of vectors that can belong to any class.
+
+- Class: text
+  Output: "In summary, you use data frames if columns (variables) can be expected to be of different types (numeric, character, logical). Matrices are for data of the same type. Consequently, the choice matrix/data.frame is only problematic if you have data of the same type."
+
+- Class: text
+  Output: "Matrices are a necessity to do linear algebra-type of operations. Data frames are more convenient if you frequently refer to its columns (via the compact $ operator)."
+
+- Class: text
+  Output: "In the 'subsetting vectors' lesson, I promissed you that the match() function would come in handy if you want to merge to datasets that are not in the same order and don't have the same length. This is the right place to figure this out!"
+
+- Class: cmd_question
+  Output: First create another data frame, called my_data2, with the results of another clinical test for patients Kelly, Bill and Jane. The first column of my_data2 has column name "patient" and corresponds to the vector c("Kelly","Bill","Jane"). The second column has name "test2" and corresponds to the numbers 21:23. Use the data.frame() function to stick the two vectors together in a data frame.
+  CorrectAnswer: my_data2 <- data.frame(patient = c("Kelly","Bill","Jane"),test2 = 21:23)
+  AnswerTests: any_of_exprs('my_data2 <- data.frame(patient = c("Kelly","Bill","Jane"),test2 = 21:23)', 'my_data2 <- data.frame("patient" = c("Kelly","Bill","Jane"),"test2" = 21:23)')
+  Hint: 'The arguments are: patient = c("Kelly","Bill","Jane") and test2 = 21:23.'
+
+- Class: cmd_question
+  Output: Now type match(my_data$patient,my_data2$patient) to look at the output.
+  CorrectAnswer: match(my_data$patient,my_data2$patient)
+  AnswerTests: omnitest(correctExpr='match(my_data$patient,my_data2$patient)')
+  Hint: match(my_data$patient,my_data2$patient)
+
+- Class: mult_question
+  Output: The output of match(my_data$patient,my_data2$patient) is a numeric vector with length
+  AnswerChoices: the number of rows in my_data; the number of columns in my_data; the number of rows in my_data2; the number of columns in my_data2
+  CorrectAnswer: the number of rows in my_data
+  AnswerTests: omnitest(correctVal="the number of rows in my_data")
+  Hint: Look at the vector and the two data frames.
+
+- Class: mult_question
+  Output: The output of match(my_data$patient,my_data2$patient) is a numeric vector in which the values are
+  AnswerChoices: the indexes in my_data$patient; the indexes in my_data2$patient
+  CorrectAnswer: the indexes in my_data2$patient
+  AnswerTests: omnitest(correctVal="the indexes in my_data2$patient")
+  Hint: Look at the vector and the two data frames.
+
+- Class: text
+  Output: The output of match(my_data$patient,my_data2$patient) gives a numeric vector with the length of the first vector, and the corresponding indexes in the second vector. Therefore, you can use this index vector to merge the two dataframes.
+ 
+- Class: cmd_question
+  Output: Using the data.frame() function, merge my_data, with the corresonding subset of my_data2. The subset of my_data2 is determined by the index vector match(my_data$patient,my_data2$patient).
+  CorrectAnswer: data.frame(my_data,my_data2[match(my_data$patient,my_data2$patient),])
+  AnswerTests: omnitest(correctExpr='data.frame(my_data,my_data2[match(my_data$patient,my_data2$patient),])')
+  Hint: In my_data2[,], you should type the index vector match(my_data$patient,my_data2$patient) BEFORE the comma, to subset the rows. The place after the comma can remain blank, because we take all columns of my_data2.
+ 
+- Class: cmd_question
+  Output: And if we only wanted to merge column 2 (test2) of my_data2 to my_data?
+  CorrectAnswer: data.frame(my_data,my_data2[match(my_data$patient,my_data2$patient),2])
+  AnswerTests: omnitest(correctExpr='data.frame(my_data,my_data2[match(my_data$patient,my_data2$patient),2])')
+  Hint: In my_data2[,], you should type the index vector match(my_data$patient,my_data2$patient) BEFORE the comma, to subset the rows. You should type 2 in the place after the comma, because we select column 2 of my_data2.
+ 
+- Class: text
+  Output: Hurray! In this lesson, you learned the basics of working with two very important and common data structures -- matrices and data frames -- and you even learned to merge data frames!
+
+

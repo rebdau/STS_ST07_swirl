@@ -1,0 +1,476 @@
+- Class: meta
+  Course: STS_ST07
+  Lesson: Data_classes
+  Author: Rebecca Dauwe
+  Type: Standard
+  Organization: UPJV
+  Version: 2.4.5
+
+- Class: text
+  Output: R distinguishes between different types of objects by their class.
+
+- Class: text
+  Output: The main classes are "numeric", "character", "factor", and "logical". 
+    You can find out what the nature of any object is using the class() command.
+
+- Class: text
+  Output: Alternatively, you can ask if it is a specific class using the is.className() command.
+
+- Class: text
+  Output: You can change the class of an object too, using the as.className() command.
+   Be careful, because this changing of the class often happens automatically, in the background, without R notifying you. 
+    In that case, it is called "coercion".
+
+- Class: text
+  Output: There is something interesting about numerics in R, that I would like to show you here.
+   
+- Class: cmd_question
+  Output: Decimal values are called numerics in R. It is the default computational data type. Create variable x, assign the decimal number 10.5 to it.
+  CorrectAnswer: x <- 10.5
+  AnswerTests: omnitest(correctExpr='x <- 10.5')
+  Hint: type x <- 10.5"
+
+- Class: cmd_question
+  Output: Print the value of x.
+  CorrectAnswer: x
+  AnswerTests: omnitest(correctExpr='x')
+  Hint: Just type x
+
+- Class: cmd_question
+  Output: Print the class name of x.
+  CorrectAnswer: class(x)
+  AnswerTests: omnitest(correctExpr='class(x)')
+  Hint: "Try typing: class(x)"
+
+- Class: cmd_question
+  Output: Now verify the class by using the is.numeric() function.
+  CorrectAnswer: is.numeric(x)
+  AnswerTests: omnitest(correctExpr='is.numeric(x)')
+  Hint: "Try typing: is.numeric(x)"
+  
+- Class: text
+  Output: So far so good, but even if we assign an integer to a variable k, it is still being saved as a numeric value.
+    
+- Class: cmd_question
+  Output: Create variable k, assign the integer number 1 to it.
+  CorrectAnswer: k <- 1
+  AnswerTests: omnitest(correctExpr='k <- 1')
+  Hint: "Try typing: k <- 1"
+
+- Class: cmd_question
+  Output: Print the value of k.
+  CorrectAnswer: k
+  AnswerTests: omnitest(correctExpr='k')
+  Hint: Just type k
+
+- Class: cmd_question
+  Output: Print the class name of k.
+  CorrectAnswer: class(k)
+  AnswerTests: omnitest(correctExpr='class(k)')
+  Hint: "Try typing: class(k)"
+ 
+- Class: text
+  Output: Even if we assigned an integer (a whole number, without decimals) to the variable k, it is still being saved as a numeric value. This means that, in the background, R has assigned the value 1.00000000000... to k.
+     
+- Class: cmd_question
+  Output: The fact that k is not an integer can be confirmed with the is.integer() function. Can you try it out?
+  CorrectAnswer: is.integer(k)
+  AnswerTests: omnitest(correctExpr='is.integer(k)')
+  Hint: Type is.integer(k)
+
+- Class: text
+  Output: We can coerce a numeric value into an integer with the as.integer() function.
+
+- Class: cmd_question
+  Output: For example, pi is an inbuilt R constant whose value is 3.141593... Type pi to have a look at it.
+  CorrectAnswer: pi
+  AnswerTests: omnitest(correctExpr='pi')
+  Hint: Type pi
+
+- Class: cmd_question
+  Output: Now, ask R what is the class of pi.
+  CorrectAnswer: class(pi)
+  AnswerTests: omnitest(correctExpr='class(pi)')
+  Hint: Type class(pi)
+  
+- Class: cmd_question
+  Output: Now, coerce pi into an integer with the as.integer() function, and assign this value to variable pii.
+  CorrectAnswer: pii <- as.integer(pi)
+  AnswerTests: omnitest(correctExpr='pii <- as.integer(pi)')
+  Hint: Type pii <- as.integer(pi)
+
+- Class: cmd_question
+  Output: What does pii look like? Print pii.
+  CorrectAnswer: pii
+  AnswerTests: omnitest(correctExpr='pii')
+  Hint: Type pii
+
+- Class: mult_question
+  Output: The coercion into an integer has truncated the value. Watch out, this is not the same like rounding. What do you think will be the output of as.integer(3.9)?
+  CorrectAnswer: "3"
+  AnswerChoices: "3; 4"
+  AnswerTests: omnitest(correctVal='3')
+  Hint: Truncate the value by removing the decimals.
+  
+- Class: cmd_question
+  Output: And print the class name of pii.
+  CorrectAnswer: class(pii)
+  AnswerTests: omnitest(correctExpr='class(pii)')
+  Hint: Type class(pii)
+  
+- Class: cmd_question
+  Output: We can parse a string for decimal values in much the same way. Aks what is the class of "5.27". (WITH the quotes!)
+  CorrectAnswer: class("5.27")
+  AnswerTests: omnitest(correctExpr='class("5.27")')
+  Hint: Type class("5.27").
+  
+- Class: cmd_question
+  Output: In a single command, try coercing the character string "5.27" into a decimal, and print the class of the coerced object.
+  CorrectAnswer: class(as.numeric("5.27"))
+  AnswerTests: omnitest(correctExpr='class(as.numeric("5.27"))')
+  Hint: You need to "nest" the function as.numeric() into the function class().
+  
+- Class: text
+  Output: On the other hand, it is erroneous trying to parse a non-decimal string.
+
+- Class: cmd_question
+  Output: Try coercing the non-decimal string "three" into a numeric object called num.
+  CorrectAnswer: num <- as.numeric("three")
+  AnswerTests: omnitest(correctExpr='num <- as.numeric("three")')
+  Hint: It will return NA, but just try typing num <- as.numeric("three")
+
+- Class: cmd_question
+  Output: Check it, and print num
+  AnswerTests: omnitest(correctExpr='num')
+  Hint: type num
+
+- Class: text
+  Output: num became an empty numeric object, the coercion could not assign a value, so it became NA! 
+
+- Class: text
+  Output: Often, it is useful to perform arithmetic on logical values. Like the C language, TRUE has the value 1, while FALSE has value 0.
+
+- Class: cmd_question
+  Output: Can you print the numeric value of TRUE using the as.numeric function?
+  CorrectAnswer: as.numeric(TRUE)
+  AnswerTests: omnitest(correctExpr='as.numeric(TRUE)')
+  Hint: Use the function as.numeric() with argument TRUE.
+  
+- Class: cmd_question
+  Output: Now we have a look at the character class of objects. Characters are one or more alphanumerics, denoted by double quotes. Create variable a, assign the value "string".
+  CorrectAnswer: a <- "string"
+  AnswerTests: omnitest(correctExpr='a <- "string"')
+  Hint: type a <- "string"
+  
+- Class: cmd_question
+  Output: Which class is it?.
+  CorrectAnswer: class(a)
+  AnswerTests: omnitest(correctExpr='class(a)')
+  Hint: "Use the class() function"
+
+- Class: cmd_question
+  Output: Now verify the class by using the is.character() function.
+  CorrectAnswer: is.character(a)
+  AnswerTests: omnitest(correctExpr='is.character(a)')
+  Hint: "Try typing: is.character(a)"
+  
+- Class : text
+  Output: We convert objects into character values with the as.character() function.
+  
+- Class : cmd_question
+  Output: In a single command, convert 3.14 into a character value and verify the class (TRUE or FALSE?).
+  CorrectAnswer: is.character(as.character(3.14))
+  AnswerTests: omnitest(correctExpr='is.character(as.character(3.14))')
+  Hint: You need to "nest" the function as.character() into the function is.character()
+
+- Class : cmd_question
+  Output: Character values can be concatenated with the paste() function. Create "Joe_the_Plumber" using the paste function and assign it to the object JtP. To first look up how to create the underscores between the words, type play(), then ?paste, read the documentation, give it a try, and then type nxt() to fill in your answer.
+  CorrectAnswer: JtP <- paste("Joe","the","Plumber",sep="_")
+  AnswerTests: omnitest(correctExpr='JtP <- paste("Joe","the","Plumber",sep="_")')
+  Hint: The arguments are "Joe","the","Plumber", and sep="_", and don't forget to assign it to JtP.
+  
+- Class : cmd_question
+  Output: Check JtP.
+  CorrectAnswer: JtP
+  AnswerTests: omnitest(correctExpr='JtP')
+  Hint: Just type JtP.
+  
+- Class: mult_question
+  Output: Do you remember "recycling"? How many character objects will be in the output of paste("number",1:26, sep="")
+  CorrectAnswer: "26"
+  AnswerChoices: "1; 26; NA"
+  AnswerTests: omnitest(correctVal='26')
+  Hint: The string "number" is going to be recycled to paste it 26 times with the numbers 1 to 26.
+  
+- Class : cmd_question
+  Output: Try it our and see what is the outcome!
+  CorrectAnswer: paste("number",1:26, sep="")
+  AnswerTests: omnitest(correctExpr='paste("number",1:26, sep="")')
+  Hint: Just type paste("number",1:26, sep="")
+  
+- Class : cmd_question
+  Output: The result is called a "vector" of length 26. There is a convenient vector of lenght 26 built in in R, called letters. Type letters to have a look at it.
+  CorrectAnswer: letters
+  AnswerTests: omnitest(correctExpr='letters')
+  Hint: Just type letters
+  
+- Class : cmd_question
+  Output: Now create the following vector with length 26 "letter 1 is a"  "letter 2 is b"  ... till "letter 26 is z". Use the paste function, 1:26, and the letters vector. You can go out and come back to swirl using play() and next() to try it out first.
+  CorrectAnswer: paste("letter",1:26, "is", letters)
+  AnswerTests: any_of_exprs('paste("letter",1:26, "is", letters)', 'paste("letter",1:26, "is", letters, sep=" ")')
+  Hint: the arguments are "letter", 1:26, "is" and letters)
+  
+- Class : cmd_question
+  Output: To extract a substring, we apply the substr() function. Here is an example showing how to extract the substring between the third and twelfth positions in a string. Type substr("Mary has a little lamb.", start=3, stop=12)
+  CorrectAnswer: substr("Mary has a little lamb.", start=3, stop=12)
+  AnswerTests: omnitest(correctExpr='substr("Mary has a little lamb.", start=3, stop=12)')
+  Hint: Just type substr("Mary has a little lamb.", start=3, stop=12)
+  
+- Class : cmd_question
+  Output: And to replace the first occurrence of the word "has" by another word "is" in the string, we apply the sub function. Type sub("has", "is", "Mary has a little lamb.")
+  CorrectAnswer: sub("has", "is", "Mary has a little lamb.")
+  AnswerTests: omnitest(correctExpr='sub("has", "is", "Mary has a little lamb.")')
+  Hint: Just type sub("has", "is", "Mary has a little lamb.")
+  
+- Class : cmd_question
+  Output: "Now it's your turn, transform Joe into a millionaire. In JtP, change Plumber into Millionaire. (You don't have to assign it to a new object)"
+  CorrectAnswer: sub("Plumber", "Millionaire", JtP)
+  AnswerTests: omnitest(correctExpr='sub("Plumber", "Millionaire", JtP)')
+  Hint: use the sub function with arguments "Plumber", "Millionaire", and JtP.
+
+- Class: text
+  Output: Now, we will look at factors. Factors represent categorical variables. Factors are like character BUT can take only a limited number of values.
+
+- Class : cmd_question
+  Output: Remember the c() function to create a vector? Create a vector containing "A", "A", "B", "A", and "B" and call the vector a.
+  CorrectAnswer: a <- c("A","A","B","A","B")
+  AnswerTests: any_of_exprs('a <- c("A","A","B","A","B")', 'a = c("A","A","B","A","B")')
+  Hint: use the c() function with arguments "A","A","B","A", and "B" and do not forget to assign it to a.
+  
+- Class: cmd_question
+  Output: What class is it?
+  CorrectAnswer: class(a)
+  AnswerTests: omnitest(correctExpr='class(a)')
+  Hint: "Use the class() function"
+  
+- Class: cmd_question
+  Output: Is it a string?
+  CorrectAnswer: is.character(a)
+  AnswerTests: omnitest(correctExpr='is.character(a)')
+  Hint: "A string is the same like a character object, so use the is.character() function"
+  
+- Class: cmd_question
+  Output: Indeed, string and character is the same thing. Is it a factor?
+  CorrectAnswer: is.factor(a)
+  AnswerTests: omnitest(correctExpr='is.factor(a)')
+  Hint: "Use the is.factor() function"
+  
+- Class: cmd_question
+  Output: We can make it a factor with the factor() function. Transform a into a factor. 
+  CorrectAnswer: a <- factor(a)
+  AnswerTests: any_of_exprs('a <- factor(a)', 'a <- as.factor(a)')
+  Hint: "You should overwrite a with a factorized version of the old a"
+  
+- Class: cmd_question
+  Output: Both functions factor() and as.factor() would have done the job the same way! Now that a is a factor, what are the levels of a? You can use the levels() function. 
+  CorrectAnswer: levels(a)
+  AnswerTests: omnitest(correctExpr='levels(a)')
+  Hint: Type levels(a)
+
+- Class: cmd_question
+  Output: With your nesting experience, I'm sure you can create the factor a containing levels "A", "A", "B", "A", and "B", directly as a factor, in one command. Go for it! 
+  CorrectAnswer: a <- factor(c("A","A","B","A","B"))
+  AnswerTests: any_of_exprs('a <- factor(c("A","A","B","A","B"))', 'a <- factor(c("A","A","B","A","B"),levels=c("A","B"))','a <- as.factor(c("A","A","B","A","B"))', 'a <- as.factor(c("A","A","B","A","B"),levels=c("A","B"))')
+  Hint: You need to nest the c() function in the factor() function.
+  
+- Class: cmd_question
+  Output: Because a is a factor, we can also apply the table() function to count the members of each level. Try it out. 
+  CorrectAnswer: table(a)
+  AnswerTests: omnitest(correctExpr='table(a)')
+  Hint: Type table(a)
+
+- Class: text
+  Output: So three elements in factor a are level "A" and two elements are level "B".
+
+- Class: text
+  Output: WATCH OUT! Here comes something that you really need to know about factors, because not knowing this can become the source of problems and bugs in your coding!
+
+- Class: cmd_question
+  Output: Coerce the factor a to a numeric vector (without assigning it to an object, just to look at the output immediately) 
+  CorrectAnswer: as.numeric(a)
+  AnswerTests: omnitest(correctExpr='as.numeric(a)')
+  Hint: Type as.numeric(a)
+ 
+- Class: text
+  Output: In the background, R stores the levels as whole numbers. The "A", and "B" are just the labels you put on the levels!
+ 
+- Class: text
+  Output: If you want to control the order of plotting the different levels of a factor (for example in a boxplot for statistics), you can do that by assigning yourself the numbers to the different levels.
+
+- Class: cmd_question
+  Output: Here you go. Create the factor b containing the same levels "A", "A", "B", "A", and "B", in a single command, nesting c() in factor(), and add the argument levels=c("B","A") to the factor() function.
+  CorrectAnswer: b <- factor(c("A","A","B","A","B"),levels=c("B","A"))
+  AnswerTests: omnitest(correctExpr='b <- factor(c("A","A","B","A","B"),levels=c("B","A"))')
+  Hint: b <- factor(c("A","A","B","A","B"),levels=c("B","A"))
+
+- Class: cmd_question
+  Output: Now apply the table() function to b. 
+  CorrectAnswer: table(b)
+  AnswerTests: omnitest(correctExpr='table(b)')
+  Hint: Type table(b)
+
+- Class: cmd_question
+  Output: Did you notice the order changed? Now look at the numeric values behind the levels of b, using the as.numeric() function. 
+  CorrectAnswer: as.numeric(b)
+  AnswerTests: omnitest(correctExpr='as.numeric(b)')
+  Hint: Type as.numeric(b)
+   
+- Class: text
+  Output: Level "B" is now number 1 and level "A" is number 2, exactly as you imposed it when you created the factor by specifying the levels.
+
+- Class: text
+  Output: But watch out for this!
+
+- Class: cmd_question
+  Output: Create the factor c containing the levels "3.5", "3.5", "9.5", "3.5", and "9.5", in a single command. (You don't need to sepcify the levels argument here).
+  CorrectAnswer: c <- factor(c("3.5","3.5","9.5","3.5","9.5"))
+  AnswerTests: any_of_exprs('c <- factor(c("3.5","3.5","9.5","3.5","9.5"))', 'factor(c("3.5","3.5","9.5","3.5","9.5"),levels=c("3.5","9.5"))')
+  Hint: c <- factor(c("3.5","3.5","9.5","3.5","9.5"))
+
+- Class: cmd_question
+  Output: You can type table(c) to check the new factor. 
+  CorrectAnswer: table(c)
+  AnswerTests: omnitest(correctExpr='table(c)')
+  Hint: Type table(c)
+
+- Class: mult_question
+  Output: What do you think will be the output of as.numeric(c)?
+  CorrectAnswer: 1 1 2 1 2
+  AnswerChoices: 3.5 3.5 9.5 3.5 9.5; 1 1 2 1 2; 3 3 9 3 9
+  AnswerTests: omnitest(correctVal='1 1 2 1 2')
+  Hint: Remember that "3.5" and "9.5" are just labels and that the levels are actually whole numbers in the background!
+
+- Class: text
+  Output: Indeed! With the as.numeric() function, you are just asking for the numbers assigned in the background to the levels. So, if you realize suddenly that, somehow, your numeric data were stored as a factor in R (like in vector c), don't use the as.nuemric() function to transform it back to real numerics!!
+
+- Class: text
+  Output: A logical looks very much like a factor, with levels TRUE and FALSE, but not exactly.
+  
+- Class: mult_question
+  Output: What are the numeric values behind FALSE and TRUE?
+  CorrectAnswer: 0 and 1
+  AnswerChoices: 1 and 2; 2 and 1; 0 and 1
+  AnswerTests: omnitest(correctVal='0 and 1')
+  Hint: You can test it with as.numeric(TRUE) and as.numeric(FALSE) in a separate R console.
+  
+- Class : cmd_question
+  Output: "For the next question, we need to create a vector of 10 numerics, normally distributed around mean 50, with standard deviation 10.
+   Create this vector by typing: a <- rnorm(n=10,mean=50,sd=10)"
+  CorrectAnswer: "a <- rnorm(n=10,mean=50,sd=10)"
+  AnswerTests: any_of_exprs('a <- rnorm(n=10,mean=50,sd=10)', 'a <- rnorm(10,50,10)')
+  Hint: "random generation of n numbers, normally distributed with mean equal to mean and standard deviation equal to sd: a <- rnorm(n=10,mean=50,sd=10)"
+
+- Class: cmd_question
+  Output: Type a>b to see which objects (numbers) in vector a are higher than the mean (50). 
+  CorrectAnswer: a>50
+  AnswerTests: omnitest(correctExpr='a>50')
+  Hint: Type a>50
+
+- Class: text
+  Output: Like here, a logical value is often created via comparison between variables. You will see much more about this in another swirl lesson dedicated to logical objects.
+
+- Class: text
+  Output: You can obtain the indices of the objects in a vector for which a condition is true (TRUE), using which().
+
+- Class: cmd_question
+  Output: Use the which() function to get the indices of objects (numbers) in vector a that are higher than the mean (50). 
+  CorrectAnswer: which(a>50)
+  AnswerTests: omnitest(correctExpr='which(a>50)')
+  Hint: This is some kind of nesting. Put a>50 as an argument in the which() function.
+  
+- Class: text
+  Output: And last but not least, something about missing data.
+  
+- Class: cmd_question
+  Output: assign NA to variable a. 
+  CorrectAnswer: a <- NA
+  AnswerTests: omnitest(correctExpr='a <- NA')
+  Hint: a <- NA
+
+- Class: cmd_question
+  Output: Use the is.na() function to see if a is a missing value 
+  CorrectAnswer: is.na(a)
+  AnswerTests: omnitest(correctExpr='is.na(a)')
+  Hint: put a as an argument in the function is.na()
+  
+- Class: cmd_question
+  Output: What is the class of a? 
+  CorrectAnswer: class(a)
+  AnswerTests: omnitest(correctExpr='class(a)')
+  Hint: Use the class() function.
+ 
+- Class: text
+  Output: "That's a surprise, isn't it?"
+  
+- Class: cmd_question
+  Output: Now we try a vector. Create vector a with values 11, NA, and 13.
+  CorrectAnswer: a <- c(11,NA,13)
+  AnswerTests: omnitest(correctExpr='a <- c(11,NA,13)')
+  Hint: Use the c() function.
+ 
+- Class: cmd_question
+  Output: use the is.na() function to see which values in a are missing
+  CorrectAnswer: is.na(a)
+  AnswerTests: omnitest(correctExpr='is.na(a)')
+  Hint: is.na(a)
+
+- Class: cmd_question
+  Output: To find out if a vlaue is NOT missing, we use !is.na(). ! stands for "not". Try it ous for vector a.
+  CorrectAnswer: !is.na(a)
+  AnswerTests: omnitest(correctExpr='!is.na(a)')
+  Hint: is.na(a)
+  
+- Class: cmd_question
+  Output: Now you can use the which() function to get the indices of all non-missing value in vector a 
+  CorrectAnswer: which(!is.na(a))
+  AnswerTests: omnitest(correctExpr='which(!is.na(a))')
+  Hint: Nest the !is.na() function in the which() function.
+
+- Class: text
+  Output: The trick to compute the number of NAs in our data is based on the fact that underneath the surface, R represents TRUE 
+    as the number 1 and FALSE as the number 0. Therefore, if we take the sum of a bunch 
+    of TRUEs and FALSEs, we get the total number of TRUEs.
+
+- Class: cmd_question
+  Output: Let's give that a try here. Call the sum() function to count the 
+    total number of TRUEs in the output of is.na(a). 
+    Don't assign the result to a new variable.
+  CorrectAnswer: sum(is.na(a))
+  AnswerTests: omnitest(correctExpr='sum(is.na(a))')
+  Hint: Nest the is.na() function in the sum() fucntion to count the number NAs in the data.
+    
+- Class: cmd_question
+  Output: And now, the number of non-missing values in a, in a single command.
+    (Don't assign the result to a new variable.)
+  CorrectAnswer: sum(!is.na(a))
+  AnswerTests: omnitest(correctExpr='sum(!is.na(a))')
+  Hint: Nest the !is.na() function in the sum() fucntion to count the number NAs in the data.
+    
+- Class: cmd_question
+  Output: The mean() function calculates the mean of a numeric vector. But different functions handle NAs in different ways. First look up in the documentation of the mean() function what you should do with missing values.
+  CorrectAnswer: ?mean
+  AnswerTests: omnitest(correctExpr='?mean')
+  Hint: Type ?mean
+
+- Class: cmd_question
+  Output: Now use the mean() function to calculate the mean of the values in vector a.
+  CorrectAnswer: mean(a, na.rm=TRUE)
+  AnswerTests: omnitest(correctExpr='mean(a, na.rm=TRUE)')
+  Hint: Use the mean() function and set the argument na.rm to TRUE.
+  
+
+  
+
+  
+
+

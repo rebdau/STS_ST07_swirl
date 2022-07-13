@@ -1,0 +1,352 @@
+- Class: meta
+  Course: STS ST07
+  Lesson: Subsetting Vectors
+  Author: Rebecca Dauwe
+  Type: Standard
+  Organization: UPJV
+  Version: 2.2.0
+
+- Class: text
+  Output: In this lesson, we'll see how to extract elements from a vector based on some conditions 
+    that we specify. In other words, we want to select some of the numbers in a vector based either on 
+    their position in the vector or the value that each number has.
+
+- Class: text
+  Output: For example, we may only be interested in the first 20 elements of a vector, or only the 
+    elements that are not NA, or only those that are positive or correspond to a specific variable 
+    of interest. By the end of this lesson, you'll know how to handle each of these scenarios.
+
+- Class: cmd_question
+  Output: I've created for you a vector called x that contains a random ordering of 20 numbers 
+    (from a standard normal distribution) and 20 NAs. Type x now to see what it looks like.
+  CorrectAnswer: x
+  AnswerTests: omnitest(correctExpr='x')
+  Hint: Type x to view its contents.
+
+- Class: text
+  Output: The way you tell R that you want to select some particular elements (i.e., a 'subset') 
+    from a vector is by placing an 'index vector' in square brackets immediately following the 
+    name of the vector.
+
+- Class: cmd_question
+  Output: For a simple example, try x[1:10] to view the first ten elements of x.
+  CorrectAnswer: x[1:10]
+  AnswerTests: omnitest(correctExpr='x[1:10]')
+  Hint: View the first ten elements of x with x[1:10].
+
+- Class: text
+  Output: Index vectors come in four different flavors -- logical vectors, vectors of positive integers, 
+    vectors of negative integers, and vectors of character strings -- each of which we'll cover in this lesson.
+
+- Class: text
+  Output: Let's start by indexing with logical vectors. One common scenario when working 
+    with real-world data is that we want to extract all elements of a vector that are not 
+    NA (i.e., missing data). Recall that is.na(x) yields a vector of logical values the same 
+    length as x, with TRUEs corresponding to NA values in x and FALSEs corresponding to non-NA values in x.
+
+- Class: mult_question
+  Output: What do you think x[is.na(x)] will give you?
+  AnswerChoices: A vector of all NAs; A vector with no NAs; A vector of TRUEs and FALSEs; A vector of length 0
+  CorrectAnswer: A vector of all NAs
+  AnswerTests: omnitest(correctVal="A vector of all NAs")
+  Hint: Remember that is.na(x) tells us where the NAs are in a vector. So if we subset x based on that, what do you expect to happen?
+
+- Class: cmd_question
+  Output: Prove it to yourself by typing x[is.na(x)].
+  CorrectAnswer: x[is.na(x)]
+  AnswerTests: omnitest(correctExpr='x[is.na(x)]')
+  Hint: Type x[is.na(x)] to see that you get all NAs, which is clearly not what we want!
+
+- Class: cmd_question
+  Output: Recall that `!` gives us the negation of a logical expression, so !is.na(x) can be read 
+    as 'is not NA'. So now, create a vector called y that contains all of the non-NA 
+    values from x.
+  CorrectAnswer: y <- x[!is.na(x)]
+  AnswerTests: omnitest(correctExpr='y <- x[!is.na(x)]')
+  Hint: Type y <- x[!is.na(x)] to capture all non-missing values from x.
+
+- Class: cmd_question
+  Output: Print y to the console.
+  CorrectAnswer: 'y'
+  AnswerTests: omnitest(correctExpr='y')
+  Hint: Type y to view its contents.
+
+- Class: text
+  Output: Now that we've isolated the non-missing values of x and put them in y, we can subset y as we please.
+
+- Class: cmd_question
+  Output: First create an index vector of logical values the same length as y, with TRUEs corresponding to values of y that are greater than zero and FALSEs corresponding to values of y that are less than or equal to zero.
+    (just to check the outcome, do not assign the index vector to a new object)
+  CorrectAnswer: 'y > 0'
+  AnswerTests: omnitest(correctExpr='y > 0')
+  Hint: Use '>'
+
+- Class: cmd_question
+  Output: And now, write a command that returns all the positive values of y (which are also the positive elements of our original vector x).
+  CorrectAnswer: 'y[y > 0]'
+  AnswerTests: omnitest(correctExpr='y[y > 0]')
+  Hint: Use the square brackets and the index vector you created just above.
+  
+- Class: cmd_question
+  Output: See what happens if you isolate the positive elements directly of x.
+  CorrectAnswer: x[x > 0]
+  AnswerTests: omnitest(correctExpr='x[x > 0]')
+  Hint: You need to create an index vector the same length as x.
+
+- Class: text
+  Output: Since NA is not a value, but rather a placeholder for an unknown quantity, the expression NA > 0 evaluates to NA. 
+    Hence we get a bunch of NAs mixed in with our positive numbers when we do this.
+
+- Class: cmd_question
+  Output: Combining our knowledge of logical operators with our new knowledge of subsetting, we could extract values of x that are both non-missing AND greater than zero, in a single command. Try it out.
+  CorrectAnswer: x[!is.na(x) & x > 0]
+  AnswerTests: omnitest(correctExpr='x[!is.na(x) & x > 0]')
+  Hint: Look above in the lesson, and combine the previous expressions with the & operator to create an index vector.
+
+- Class: cmd_question
+  Output: I've already shown you how to subset just the first ten values of x using x[1:10]. Now, applying your skills in creating sequences of numbers, create a vector that repeats ten times the first ten values of y.
+  CorrectAnswer: y[rep(1:10,10)]
+  AnswerTests: any_of_exprs('y[rep(c(1:10),10)]', 'y[rep(c(1:10),times=10)]','y[rep(1:10,10)]', 'y[rep(1:10,times=10)]')
+  Hint: leave swirl to try it out using play() and come back using nxt(). You need to create an index vector that repeats the numbers 1 to 10 ten times and place that vector between the square brackets next to y. (watch out, not x!)
+
+- Class: text
+  Output: The length of the subsetted vector can thus become much longer than the length of the original vector!
+
+- Class: cmd_question
+  Output: We can alse take a subset of a subset, all in a single command, just by adding another pair of square brackets. Can you give the first 10 non-missing values of x using the expression x[][]?
+  CorrectAnswer: x[!is.na(x)][1:10]
+  AnswerTests: omnitest(correctExpr='x[!is.na(x)][1:10]')
+  Hint: First select the non-NA values, between the first pair of square brackets, then select the first 10 of these '1:10' between the second pair of square brackets. 
+
+- Class: text
+  Output: Many programming languages use what's called 'zero-based indexing', which means that the 
+    first element of a vector is considered element 0. R uses 'one-based indexing', which (you guessed it!) 
+    means the first element of a vector is considered element 1.
+
+- Class: cmd_question
+  Output: Can you figure out how we'd subset the 3rd, 5th, and 7th elements of x? Hint -- Use the c() 
+    function to specify the element numbers as a numeric vector.
+  CorrectAnswer: x[c(3, 5, 7)]
+  AnswerTests: omnitest(correctExpr='x[c(3, 5, 7)]')
+  Hint: Create a vector of indexes with c(3, 5, 7), then put that inside of the square brackets.
+
+- Class: cmd_question
+  Output: It's important that when using integer vectors to subset our vector x, we stick with the set 
+    of indexes {1, 2, ..., 40} since x only has 40 elements. What happens if we ask for the zeroth element 
+    of x (i.e. x[0])? Give it a try.
+  CorrectAnswer: x[0]
+  AnswerTests: omnitest(correctExpr='x[0]')
+  Hint: Try x[0] to see what happens when we refer to the zeroth element of a vector, which is not defined in R.
+
+- Class: cmd_question
+  Output: As you might expect, we get nothing useful. Unfortunately, R doesn't prevent us from 
+    doing this. What if we ask for the 3000th element of x? Try it out.
+  CorrectAnswer: x[3000]
+  AnswerTests: omnitest(correctExpr='x[3000]')
+  Hint: Request the 3000th element of x (which does not exist) with x[3000].
+
+- Class: text
+  Output: Again, nothing useful, but R doesn't prevent us from asking for it. This should be a 
+    cautionary tale. You should always make sure that what you are asking for is within the bounds 
+    of the vector you're working with.
+
+- Class: text
+  Output: What if we're interested in all elements of x EXCEPT the 2nd and 10th? It would 
+    be pretty tedious to construct a vector containing all numbers 1 through 40 EXCEPT 2 and 10.
+
+- Class: cmd_question
+  Output: Luckily, R accepts negative integer indexes. Whereas x[c(2, 10)] gives us ONLY the 2nd and 
+    10th elements of x, x[c(-2, -10)] gives us all elements of x EXCEPT for the 2nd and 10 elements.  
+    Try x[c(-2, -10)] now to see this.
+  CorrectAnswer: x[c(-2, -10)]
+  AnswerTests: omnitest(correctExpr='x[c(-2, -10)]')
+  Hint: Give x[c(-2, -10)] a try.
+
+- Class: cmd_question
+  Output: A shorthand way of specifying multiple negative numbers is to put the negative sign out in 
+    front of the vector of positive numbers. Type x[-c(2, 10)] to get the exact same result.
+  CorrectAnswer: x[-c(2, 10)]
+  AnswerTests: omnitest(correctExpr='x[-c(2, 10)]')
+  Hint: Use x[-c(2, 10)] to simply things a bit. This could be a time saver if specifying many negative indexes.
+
+- Class: cmd_question
+  Output: We can also use the indexes to change the order in a vector. 
+    For example, what would you type to get the x vector in opposite order, from the last to the first element?
+    Do this without knowing (without specifying) how many elements x has, so that your command would work for vectors of any length.
+  CorrectAnswer: 'x[length(x):1]'
+  AnswerTests: omnitest(correctExpr='x[length(x):1]')
+  Hint: The last element of x is at position length(x). The first element of x is at position 1. You have to go from the last to the first position using the ':' operator.
+
+- Class: cmd_question
+  Output: We can also reorder the elements in vector in ascending or descending order. The order() function will help us with that. 
+    Create a vector o <- order(y)
+  CorrectAnswer: 'o <- order(y)'
+  AnswerTests: omnitest(correctExpr='o <- order(y)')
+  Hint: o <- order(y).
+
+- Class: cmd_question
+  Output: Now type o to see the result. 
+  CorrectAnswer: 'o'
+  AnswerTests: omnitest(correctExpr='o')
+  Hint: Type o
+  
+- Class: text
+  Output: The output of the order() function gives you the indexes of the reordered elements of y in ascending order. 
+    Setting the argument 'decreasing' to FALSE, we can obtain the indexes of the reordered elements in descending order.
+
+- Class: cmd_question
+  Output: Use the o vector to reorder vector y from small to large. 
+  CorrectAnswer: 'y[o]'
+  AnswerTests: omnitest(correctExpr='y[o]')
+  Hint: o is the index vector.
+ 
+- Class: cmd_question
+  Output: 'We can also select elements in a vector based on their presence in another vector, not necessarily of the same length. Create a vector a <- 1:10'
+  CorrectAnswer: 'a <- 1:10'
+  AnswerTests: omnitest(correctExpr='a <- 1:10')
+  Hint: a <- 1:10
+ 
+- Class: cmd_question
+  Output: 'and create vector b <- c(2,5,16)'
+  CorrectAnswer: 'b <- c(2,5,16)'
+  AnswerTests: omnitest(correctExpr='b <- c(2,5,16)')
+  Hint: b <- c(2,5,16)
+ 
+- Class: text
+  Output: 'The %in% operator tells for each element in the vector on the left side of the operator if it is present in the vector on the right side of the operator. The output of (a %in% b) is thus a logical vector with the length of vector a.'
+
+- Class: cmd_question
+  Output: 'Try it out, type a %in% b'
+  CorrectAnswer: 'a %in% b'
+  AnswerTests: omnitest(correctExpr='a %in% b')
+  Hint: a %in% b
+ 
+- Class: cmd_question
+  Output: 'now use the %in% operator to extract from vector a all values that are present in vector b'
+  CorrectAnswer: 'a[a %in% b]'
+  AnswerTests: omnitest(correctExpr='a[a %in% b]')
+  Hint: use the square brackets and create the index vector using '%in%'
+
+- Class: cmd_question
+  Output: 'How many elements of a are present in B? Remember that TRUE is 1 and FALSE = 0, and use the sum() function.'
+  CorrectAnswer: 'sum(a %in% b)'
+  AnswerTests: omnitest(correctExpr='sum(a %in% b)')
+  Hint: Remember that TRUE is 1 and FALSE = 0, and use the sum() function.
+  
+- Class: text
+  Output: 'The match() function is related to the %in% operator.'
+
+- Class: text
+  Output: 'The output of match(a,b) is a numeric vector with the length of vector a, giving the position of the first match of each element of vector a in vector b.'
+
+- Class: cmd_question
+  Output: 'Try it out, type match(a,b)'
+  CorrectAnswer: 'match(a,b)'
+  AnswerTests: omnitest(correctExpr='match(a,b)')
+  Hint: match(a,b)
+ 
+- Class: text
+  Output: The output tells us that the second element of vector a is at position 1 of vector b and the 5th element in vector a is at position 2 of vector b. The other elements of vector a are not present in vector b, and are therefore represented as NA."
+
+- Class: cmd_question
+  Output: 'The output of match(a,b) is a vector with indexes in vector b. Although it has the length of vector a, it can thus be used to subset vector b. Can you subset b using the index vector created by match(a,b)?'
+  CorrectAnswer: 'b[match(a,b)]'
+  AnswerTests: omnitest(correctExpr='b[match(a,b)]')
+  Hint: b[match(a,b)]
+
+- Class: text
+  Output: Did you see that this subset is much longer than the length of b? It has the length of a. This corresponds actually to the elements in b that are also present in a (aka the intersection between a and b), -- ALIGNED WITH vector a -- ! You can perfectly put this 'subsetted' b vector next to a."
+
+- Class: text
+  Output: This will come in handy if you want to merge two datasets that are not in the same order and don't have the same length. You need to find the intersection and match the rows.
+
+- Class: text
+  Output: So far, we've covered three types of index vectors -- logical, positive integer, and 
+    negative integer. The only remaining type requires us to introduce the concept of 'named' elements.
+
+- Class: cmd_question
+  Output: Create a numeric vector with three named elements using vect <- c(foo = 11, bar = 2, norf = NA).
+  CorrectAnswer: vect <- c(foo = 11, bar = 2, norf = NA)
+  AnswerTests: omnitest(correctExpr='vect <- c(foo = 11, bar = 2, norf = NA)')
+  Hint: Create a named vector with vect <- c(foo = 11, bar = 2, norf = NA).
+
+- Class: cmd_question
+  Output: When we print vect to the console, you'll see that each element has a name. Try it out.
+  CorrectAnswer: vect
+  AnswerTests: omnitest(correctExpr='vect')
+  Hint: Type vect to view its contents.
+
+- Class: cmd_question
+  Output: We can also get the names of vect by passing vect as an argument to the names() function. Give that a try.
+  CorrectAnswer: names(vect)
+  AnswerTests: omnitest(correctExpr='names(vect)')
+  Hint: Check out the results of names(vect).
+
+- Class: cmd_question
+  Output: Alternatively, we can create an unnamed vector vect2 with c(11, 2, NA). Do that now.
+  CorrectAnswer: vect2 <- c(11, 2, NA)
+  AnswerTests: omnitest(correctExpr='vect2 <- c(11, 2, NA)')
+  Hint: Create an ordinary (unnamed) vector called vect2 that contains c(11, 2, NA).
+
+- Class: cmd_question
+  Output: Then, we can add the `names` attribute to vect2 after the fact with names(vect2) <- c("foo", "bar", "norf"). Go ahead.
+  CorrectAnswer: names(vect2) <- c("foo", "bar", "norf")
+  AnswerTests: omnitest(correctExpr='names(vect2) <- c("foo", "bar", "norf")')
+  Hint: Add names to vect2 with names(vect2) <- c("foo", "bar", "norf").
+
+- Class: cmd_question
+  Output: Now, let's check that vect and vect2 are the same by passing them as arguments to the identical() function.
+  CorrectAnswer: identical(vect, vect2)
+  AnswerTests: any_of_exprs('identical(vect, vect2)', 'identical(vect2, vect)')
+  Hint: The identical() function tells us if its first two arguments are, well, identical.
+
+- Class: text
+  Output: Indeed, vect and vect2 are identical named vectors.
+
+- Class: mult_question
+  Output: Now, back to the matter of subsetting a vector by named elements. Which of 
+    the following commands do you think would give us the second element of vect?
+  AnswerChoices: vect["bar"]; vect[bar]; vect["2"]
+  CorrectAnswer: vect["bar"]
+  AnswerTests: omnitest(correctVal='vect["bar"]')
+  Hint: If we want the element named "bar" (i.e. the second element of vect), which command would get us that?
+
+- Class: text
+  Output: Of course, vect["2"] would not work. Putting the number 2 in quotes tells R that
+    it is a character. Integer indexes need to be integers.
+    
+- Class: cmd_question
+  Output: Now, try it out. Give the second element of vect by specifying its name.
+  CorrectAnswer: vect["bar"]
+  AnswerTests: omnitest(correctExpr='vect["bar"]')
+  Hint: Try vect["bar"].
+
+- Class: cmd_question
+  Output: Likewise, we can specify a vector of names with vect[c("foo", "norf")]. Try it out.
+  CorrectAnswer: vect[c("foo", "norf")]
+  AnswerTests: omnitest(correctExpr='vect[c("foo", "norf")]')
+  Hint: create the index vector c("foo", "norf") and place it between the square brackets of vect[].
+  
+- Class: cmd_question
+  Output: Of course, we can still use integer indexes on named vectors. Create the same vector as in the previous question, using integer indexes.
+  CorrectAnswer: vect[c(1,3)]
+  AnswerTests: omnitest(correctExpr='vect[c(1,3)]')
+  Hint: The elements "foo" and "norf" are on positions 1 and 3 of vect. Come on, you can do it!
+  
+- Class: cmd_question    
+  Output: So, how would you index the second element of vect using an integer?
+  CorrectAnswer: vect[2]
+  AnswerTests: omnitest(correctExpr='vect[2]')
+  Hint: Look back up in the lesson ...
+
+- Class: text
+  Output: "BEST PRACTICE: If you have names, it is best to use them. This issue will become more important
+    when we start working with data frame and lists. The problem is that if the columns in a dataframe get
+    out of order, column 2 may no longer be what it was. Using a name ensures that R always gets the 
+    correct thing you are interested in."
+
+- Class: text
+  Output: Hurray!! Now you know all four methods of subsetting data from vectors.
+
+
+  
