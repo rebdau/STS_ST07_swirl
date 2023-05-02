@@ -14,18 +14,18 @@
 - Class: cmd_question
   Output: You can list all the objects in your local workspace using ls(). 
     "Local workspace" refers to what is loaded or created in R's memory that can be accessed 
-    in this session. Closing R wipes this local memory clean.
+    in this session. Closing R wipes this local memory clean. Go ahead and have a look at the workspace.
   CorrectAnswer: ls()
   AnswerTests: omnitest(correctExpr='ls()')
   Hint: Type ls() to view all the objects in your local workspace.
   
 - Class: text
-  Output: If you are continuing from the previous lesson (Basic_Building_Blocks) without 
+  Output: If you are continuing from a previous lesson (Basic_Building_Blocks) without 
     closing R or RStudio, you will likely notice that the variables you created are still
     in R's memory, or local workspace.
 
 - Class: cmd_question
-  Output: Similar to the previous lesson, let's assign 9 to x using x <- 9.
+  Output: Now let's create an object in the workspace. Let's assign 9 to x using x <- 9.
   CorrectAnswer: x <- 9
   AnswerTests: omnitest(correctExpr='x <- 9')
   Hint: Type x <- 9 to assign 9 to x.
