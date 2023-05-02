@@ -113,3 +113,11 @@
   Output: "Hurray! You now know how to extract the most out of the output of the functions you are going to apply!"
 
 
+- Class: mult_question
+  Output: Please submit the log of this lesson to Google Forms so
+    that Rebecca may evaluate your progress.
+  AnswerChoices: Sure, no problem
+  CorrectAnswer: Sure, no problem
+  AnswerTests: submit_log()
+  Hint: hint, select "Sure, no problem"!
+  

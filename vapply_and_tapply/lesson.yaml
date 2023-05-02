@@ -121,3 +121,11 @@
 
 
 
+- Class: mult_question
+  Output: Please submit the log of this lesson to Google Forms so
+    that Rebecca may evaluate your progress.
+  AnswerChoices: Sure, no problem
+  CorrectAnswer: Sure, no problem
+  AnswerTests: submit_log()
+  Hint: hint, select "Sure, no problem"!
+  

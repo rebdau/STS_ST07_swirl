@@ -187,3 +187,11 @@
     to generate sequences of numbers. You also learnt to use the function length() 
     and the ':' operator. Your R skills are building!
 
+- Class: mult_question
+  Output: Please submit the log of this lesson to Google Forms so
+    that Rebecca may evaluate your progress.
+  AnswerChoices: Sure, no problem
+  CorrectAnswer: Sure, no problem
+  AnswerTests: submit_log()
+  Hint: hint, select "Sure, no problem"!
+  

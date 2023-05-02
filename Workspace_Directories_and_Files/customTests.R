@@ -1,11 +1,11 @@
 # Put custom tests in this file.
-
+      
 # Uncommenting the following line of code will disable
 # auto-detection of new variables and thus prevent swirl from
 # executing every command twice, which can slow things down.
-
+      
 # AUTO_DETECT_NEWVAR <- FALSE
-
+      
 # However, this means that you should detect user-created
 # variables when appropriate. The answer test, creates_new_var()
 # can be used for for the purpose, but it also re-evaluates the
@@ -26,8 +26,7 @@ getLog <- function(){
 submit_log <- function(){
   
   # Please edit the link below
-  # pre_fill_link <- "https://docs.google.com/forms/d/1ngWrz5A5w5RiNSuqzdotxkzgk0DKU-88FmnTHj20nuI/viewform?entry.1733728592"
-  pre_fill_link <- "https://docs.google.com/forms/d/e/1FAIpQLSdJK7PRLU9PCJrT2R7ALlGet4nSE6ufvl398iYM_l9v6_nTBQ/viewform?usp=pp_url"
+  pre_fill_link <- "https://docs.google.com/forms/d/e/1FAIpQLSdAOjg2BmNt7qtlj-KZbdoq7Gk_6uvZEy3xh0OBhqvqwBwjhQ/viewform?entry.419798233"
   
   # Do not edit the code below
   if(!grepl("=$", pre_fill_link)){

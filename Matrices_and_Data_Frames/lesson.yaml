@@ -360,3 +360,11 @@
   Output: Hurray! In this lesson, you learned the basics of working with two very important and common data structures -- matrices and data frames -- and you even learned to merge data frames!
 
 
+- Class: mult_question
+  Output: Please submit the log of this lesson to Google Forms so
+    that Rebecca may evaluate your progress.
+  AnswerChoices: Sure, no problem
+  CorrectAnswer: Sure, no problem
+  AnswerTests: submit_log()
+  Hint: hint, select "Sure, no problem"!
+  
