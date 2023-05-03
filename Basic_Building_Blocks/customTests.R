@@ -26,13 +26,8 @@ getLog <- function(){
 submit_log <- function(){
   
   # Please edit the link below
-<<<<<<< HEAD
   pre_fill_link <- "https://docs.google.com/forms/d/e/1FAIpQLSdAOjg2BmNt7qtlj-KZbdoq7Gk_6uvZEy3xh0OBhqvqwBwjhQ/viewform?entry.419798233"
   
-=======
-  # pre_fill_link <- "https://docs.google.com/forms/d/1ngWrz5A5w5RiNSuqzdotxkzgk0DKU-88FmnTHj20nuI/viewform?entry.1733728592"
-  pre_fill_link <- "https://docs.google.com/forms/d/e/1FAIpQLSdAOjg2BmNt7qtlj-KZbdoq7Gk_6uvZEy3xh0OBhqvqwBwjhQ/viewform?entry.419798233"
->>>>>>> d4d749acc869c0373fedbf0ff30005c04545eef2
   # Do not edit the code below
   if(!grepl("=$", pre_fill_link)){
     pre_fill_link <- paste0(pre_fill_link, "=")
